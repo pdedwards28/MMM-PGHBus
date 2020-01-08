@@ -20,10 +20,16 @@ Module.register("MMM-PGHBus", {
         Log.info("Starting module: " + this.name);
 
         requiresVersion: "2.1.0",
-
+     
         this.busStopPairDict = {};
         this.bus = null;
         this.getBuses();       // set intervals for bus schedule to update
+	// Add refreshing on time interval
+	var self = this;
+	setInterval(function() {
+		Log.info("Refreshing buses");
+		self.getBuses();
+	},this.config.updateInterval);
     },
 
 
